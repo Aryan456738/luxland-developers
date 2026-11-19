@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luxland Developers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Manrope:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F1F4EE;--ink:#14211B;--mute:#5A6A61;--line:rgba(20,33,27,.14);--card:#E3E9DF;
+--deep:#0B1510;--chalk:#EEF2EB;--moss:#4E7A5F;--brass:#D1A64F;--clay:#BC5642;
+--hf:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--bf:'Manrope','Segoe UI',system-ui,sans-serif;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1712;--ink:#E8EDE6;--mute:#93A399;--line:rgba(232,237,230,.15);--card:#15211B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1712;--ink:#E8EDE6;--mute:#93A399;--line:rgba(232,237,230,.15);--card:#15211B;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--bf);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--hf);font-weight:700;line-height:1.02;margin:0;letter-spacing:-.025em}
+p{margin:0}a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+#bar{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--moss),var(--brass));z-index:50}
+#glow{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(420px circle at var(--x,50%) var(--y,30%),rgba(209,166,79,.13),transparent 70%)}
+.btn{display:inline-block;background:var(--brass);color:#17110A;font:600 .95rem var(--bf);padding:13px 26px;border:0;border-radius:999px;cursor:pointer;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px rgba(209,166,79,.6)}
+.rv{opacity:0;transform:translateY(40px) scale(.98);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.vis{opacity:1;transform:none}
+nav{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(940px,calc(100% - 24px));z-index:40;display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 24px;border-radius:999px;background:rgba(14,24,19,.55);border:1px solid rgba(238,242,235,.14);backdrop-filter:blur(16px);color:var(--chalk)}
+.logo{font:700 1.1rem var(--hf);text-decoration:none}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:.9rem}nav li a{text-decoration:none;opacity:.8}nav li a:hover{opacity:1}
+@media(max-width:760px){nav ul{display:none}}
+/* hero */
+.hero{position:relative;min-height:100svh;background:var(--deep);color:var(--chalk);display:flex;align-items:flex-end;overflow:hidden}
+.b{position:absolute;border-radius:50%;filter:blur(90px);animation:fl 14s ease-in-out infinite alternate}
+.b1{width:46vw;height:46vw;background:var(--moss);top:-10%;left:-8%;opacity:.55}
+.b2{width:38vw;height:38vw;background:var(--brass);bottom:-12%;right:-6%;opacity:.38;animation-delay:-5s}
+.b3{width:26vw;height:26vw;background:#2D5A6B;top:30%;right:22%;opacity:.4;animation-delay:-9s}
+@keyframes fl{to{transform:translate(8vw,6vh) scale(1.2)}}
+.hero svg{position:absolute;inset:-10% 0;width:100%;height:120%;opacity:.35}.hero path{fill:none;stroke:var(--chalk);stroke-opacity:.35}
+.hero .wrap{position:relative;padding-bottom:12vh}
+.hero h1{font-size:clamp(3rem,10vw,8rem);max-width:10ch}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-right:.22em}
+.w>span{display:inline-block;transform:translateY(110%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.09s + .2s)}
+@keyframes up{to{transform:none}}
+.hero p,.hero .btn{opacity:0;animation:fi .9s 1s forwards}.hero p{max-width:46ch;margin:26px 0 34px;color:#C5D0C7;font-size:1.1rem}
+@keyframes fi{to{opacity:1}}
+.mq{overflow:hidden;background:var(--brass);color:#17110A;padding:16px 0;font:700 1.25rem var(--hf)}
+.mt{display:flex;gap:44px;width:max-content;animation:mq 30s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:30px;padding:clamp(50px,8vw,90px) 0}
+.stats b{display:block;font:700 clamp(2.4rem,5vw,3.8rem) var(--hf)}.stats span{color:var(--mute)}
+/* story */
+.story{height:380vh;background:var(--deep);color:var(--chalk)}
+.stick{position:sticky;top:0;height:100svh;display:flex;align-items:center}
+.stick .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(20px,5vw,70px);align-items:center;width:100%}
+h2.big{font-size:clamp(2rem,4.6vw,3.6rem)}
+#cap{margin:18px 0 26px;color:#C5D0C7;min-height:5em;max-width:38ch}
+.leg div{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid rgba(238,242,235,.14)}
+.leg i{width:14px;height:14px;border-radius:4px}.leg b{margin-left:auto;font:700 1.3rem var(--hf)}
+#map{width:100%;height:auto;filter:drop-shadow(0 30px 50px rgba(0,0,0,.4))}
+#map rect{fill:transparent;stroke:rgba(238,242,235,.28);stroke-width:1.2;transition:fill .5s,stroke .5s}
+#map .on.a{fill:var(--moss);stroke:var(--moss)}#map .on.r{fill:var(--brass);stroke:var(--brass)}#map .on.s{fill:var(--clay);stroke:var(--clay)}
+#map text{fill:var(--chalk);font:600 12px var(--bf);text-anchor:middle;opacity:.75;pointer-events:none}
+#map .rd{stroke:rgba(238,242,235,.12);stroke-width:14;fill:none}
+@media(max-width:820px){.stick .wrap{grid-template-columns:1fr;gap:10px}#cap{min-height:4.4em;margin:8px 0 12px}.leg div{padding:5px 0}}
+/* projects */
+.proj{height:260vh}
+.proj .stick{flex-direction:column;align-items:stretch;justify-content:center;overflow:hidden}
+.track{display:flex;gap:22px;margin-top:34px;padding:0 clamp(18px,4vw,40px);will-change:transform}
+.pc{flex:0 0 min(78vw,430px);border-radius:26px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.pc .art{height:min(34vh,260px);position:relative}
+.pc .art::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(255,255,255,.08) 22px 23px)}
+.pc .t{padding:18px 22px 24px}.pc h3{font-size:1.45rem}.pc p{color:var(--mute);font-size:.92rem}
+.pc .m{display:flex;justify-content:space-between;margin-top:14px;font-weight:600}
+/* plots */
+.sec{padding:clamp(70px,11vw,130px) 0}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.chip{background:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font:500 .9rem var(--bf);cursor:pointer;transition:.2s}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;perspective:900px}
+.plot{position:relative;border:1px solid var(--line);border-radius:24px;padding:24px;background:var(--card);display:flex;flex-direction:column;gap:6px;transition:transform .2s,opacity .8s}
+.plot h3{font-size:1.6rem}.plot .pr{font:700 1.35rem var(--hf);margin-top:10px}.plot span{color:var(--mute);font-size:.92rem}
+.plot a{margin-top:10px;font-weight:600;font-size:.92rem}.plot.s{opacity:.55}
+.bd{align-self:flex-start;font:600 .75rem var(--bf);font-style:normal;color:#fff;padding:3px 11px;border-radius:99px;margin-bottom:8px}
+.bd.a{background:var(--moss)}.bd.r{background:#8F6E22}.bd.s{background:var(--clay)}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px;margin-top:40px}
+blockquote{margin:0;border-left:3px solid var(--brass);padding-left:20px}
+blockquote p{font:500 1.18rem/1.45 var(--hf)}blockquote cite{display:block;margin-top:14px;font-style:normal;color:var(--mute);font-size:.9rem}
+.contact{background:var(--deep);color:var(--chalk)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,6vw,80px)}
+.lead{margin-top:16px;color:#C5D0C7;max-width:36ch}
+form{display:grid;gap:14px}label{display:grid;gap:6px;font-size:.9rem;color:#C5D0C7}
+input,select,textarea{font:inherit;color:inherit;background:rgba(238,242,235,.07);border:1px solid rgba(238,242,235,.22);border-radius:12px;padding:13px 14px;min-width:0}
+select option{color:#111}
+#ok{display:none;padding:16px;border-radius:12px;background:rgba(78,122,95,.4)}
+@media(max-width:820px){.cg{grid-template-columns:1fr}}
+footer{background:var(--deep);color:#93A399;padding:28px 0;font-size:.88rem;border-top:1px solid rgba(238,242,235,.12)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero p,.hero .btn{opacity:1;transform:none}.w>span{transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="bar"></div><div id="glow"></div>
+<div id="site">
+<nav><a class="logo" href="#top">Luxland</a>
+<ul><li><a href="#story">How we plan</a></li><li><a href="#projects">Projects</a></li><li><a href="#plots">Plots</a></li><li><a href="#voices">Clients</a></li></ul>
+<a class="btn" href="#contact">Enquire</a></nav>
+
+<header class="hero" id="top"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div>
+<svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g id="topo"></g></svg>
+<div class="wrap"><h1 id="h1">Land that keeps its value.</h1>
+<p>Surveyed, legally cleared plots across Maharashtra, with roads and water in place before you sign.</p>
+<a class="btn" href="#plots">See available plots</a></div></header>
+
+<div class="mq" aria-hidden="true"><div class="mt" id="mt"></div></div>
+
+<div class="wrap stats">
+<div class="rv"><b class="num" data-n="120">0</b><span>plots handed over</span></div>
+<div class="rv"><b class="num" data-n="4">0</b><span>live projects</span></div>
+<div class="rv"><b class="num" data-n="15">0</b><span>years in land</span></div>
+<div class="rv"><b class="num" data-n="900">0</b><span>site visits booked</span></div></div>
+
+<section class="story" id="story"><div class="stick"><div class="wrap">
+<div><h2 class="big">Every plot is planned before it’s sold</h2><p id="cap"></p>
+<div class="leg"><div><i style="background:var(--moss)"></i>Available<b id="na">0</b></div><div><i style="background:var(--brass)"></i>Reserved<b id="nr">0</b></div><div><i style="background:var(--clay)"></i>Sold<b id="ns">0</b></div></div></div>
+<svg id="map" viewBox="0 0 600 400" role="img" aria-label="Layout map of a Luxland project"></svg>
+</div></div></section>
+
+<section class="proj" id="projects"><div class="stick"><div class="wrap" style="display:block;width:100%"><h2 class="big">Our projects</h2></div>
+<div class="track" id="track"></div></div></section>
+
+<section class="sec" id="plots"><div class="wrap"><h2 class="big rv">Plots you can visit this week</h2>
+<div class="filters" id="filters" role="group" aria-label="Filter by size"></div>
+<div class="grid" id="grid"></div></div></section>
+
+<section class="sec" id="voices" style="background:var(--card)"><div class="wrap"><h2 class="big rv">People who already own with us</h2>
+<div class="quotes" id="quotes"></div></div></section>
+
+<section class="sec contact" id="contact"><div class="wrap cg">
+<div class="rv"><h2 class="big">Book a site visit</h2><p class="lead">Tell us which plot you like. We call back within one working day.</p></div>
+<form id="f" class="rv"><label>Name<input name="name" required autocomplete="name"></label>
+<label>Phone<input name="phone" type="tel" required autocomplete="tel"></label>
+<label>Plot of interest<select name="plot" id="sel"></select></label>
+<label>Message<textarea name="msg" rows="3"></textarea></label>
+<button class="btn" type="submit">Send enquiry</button><div id="ok" role="status">Thanks. We’ve noted your enquiry and will call you soon.</div></form>
+</div></section>
+<footer><div class="wrap">© Luxland Developers. Sample content. </div></footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* website data */
+const KEY='luxland-v2';let D=null;
+try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!D){const A=[900,1200,1500,1800,2200,2600,1000,2000,1200,1500,1800,900,2400,1600,1100],S='saarsasrasaarsa',F=['East','North','West','South'];
+D={plots:A.map((a,i)=>({id:'ABC'[i/5|0]+'-0'+(i%5+1),area:a,face:F[i%4],price:Math.round(a*.035)/2,st:S[i]})),enq:[],
+tes:[['The title papers were ready before I asked. That is rare in land deals.','Sanjay Patil, Karjat'],['We saw the exact plot, the road and the water point on the same visit.','Meera Kulkarni, Badlapur'],['Registration took one day. Nobody chased me for anything extra.','Rahul Deshmukh, Neral']]}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}};
+addEventListener('storage',e=>{if(e.key==KEY){try{D=JSON.parse(e.newValue)}catch(x){return}renderSite()}});
+/* hero */
+$('#h1').innerHTML=$('#h1').textContent.split(' ').map((w,i)=>`<span class="w"><span style="--i:${i}">${w}</span></span>`).join('');
+let d='';for(let i=0;i<14;i++){const y=60+i*52,a=24+i*3;d+=`<path data-s="${(i%4+1)*.05}" d="M-50 ${y} C 200 ${y-a}, 400 ${y+a*1.6}, 650 ${y} S 1000 ${y-a*1.4}, 1250 ${y+a}"/>`}
+$('#topo').innerHTML=d;
+const tw=['Badlapur','Karjat','Neral','Murbad','Kalyan','Ambernath'].map(t=>`<span>${t} ✦</span>`).join('');$('#mt').innerHTML=tw+tw;
+const Pr=[['Luxland Greens','Badlapur','24 plots','from ₹18 lakh','#3F6B52,#8BAA7A'],['Luxland Heights','Karjat','16 plots','from ₹26 lakh','#3B4F6B,#8FA5BF'],['Luxland Riverside','Neral','32 plots','from ₹14 lakh','#6B5A3A,#C9AE72'],['Luxland Hills','Murbad','12 plots','from ₹11 lakh','#5A3F4F,#B58A9C']];
+$('#track').innerHTML=Pr.map(p=>`<article class="pc"><div class="art" style="background:linear-gradient(140deg,${p[4]})"></div><div class="t"><h3>${p[0]}</h3><p>${p[1]}</p><div class="m"><span>${p[2]}</span><span>${p[3]}</span></div></div></article>`).join('');
+/* website render */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.15});
+const nio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target,n=+el.dataset.n,t0=performance.now();nio.unobserve(el);
+(function s(t){const k=clamp((t-t0)/1400);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+(n>=100?'+':'');if(k<1)requestAnimationFrame(s)})(t0)}}),{threshold:.6});
+document.querySelectorAll('.num').forEach(n=>nio.observe(n));
+const obs=()=>document.querySelectorAll('.rv:not(.vis)').forEach(el=>io.observe(el));
+const SL={a:'Available',r:'Reserved',s:'Sold'},FL=[['All',0,1e9],['Under 1,200 sq ft',0,1200],['1,200 to 2,000 sq ft',1200,2000],['Above 2,000 sq ft',2000,1e9]];
+let cur=0,rects=[],MP=[],lastK=-1;
+const caps=['Each plot is measured and marked on the ground before it is listed.','Internal roads, drainage and water lines are laid before any sale.','Our legal team checks title documents for every plot, then it goes on sale.'];
+function renderSite(){
+MP=D.plots.slice(0,15);let m='<path class="rd" d="M0 138H600M0 258H600"/>';
+MP.forEach((p,i)=>{const x=30+(i%5)*112,y=[30,150,270][i/5|0];m+=`<rect class="${p.st}" x="${x}" y="${y}" width="88" height="96" rx="8"/><text x="${x+44}" y="${y+53}">${esc(p.id)}</text>`});
+$('#map').innerHTML=m;rects=[...document.querySelectorAll('#map rect')];lastK=-1;
+$('#grid').innerHTML=D.plots.filter(p=>cur==0||(p.area>=FL[cur][1]&&p.area<FL[cur][2])).map(p=>`<article class="plot rv ${p.st}"><i class="bd ${p.st}">${SL[p.st]}</i><h3>Plot ${esc(p.id)}</h3><span>${p.area.toLocaleString('en-IN')} sq ft, ${p.face} facing</span><div class="pr">₹${p.price} lakh</div>${p.st=='s'?'':`<a href="#contact" data-p="${esc(p.id)}">Ask about this plot</a>`}</article>`).join('');
+$('#filters').innerHTML=FL.map((f,i)=>`<button class="chip" aria-pressed="${i==cur}" data-i="${i}">${f[0]}</button>`).join('');
+const sv=$('#sel').value;$('#sel').innerHTML='<option>Not sure yet</option>'+D.plots.filter(p=>p.st!='s').map(p=>`<option>Plot ${esc(p.id)}</option>`).join('');if(sv)$('#sel').value=sv;
+$('#quotes').innerHTML=D.tes.map(t=>`<blockquote class="rv"><p>${esc(t[0])}</p><cite>${esc(t[1])}</cite></blockquote>`).join('');
+obs();frame()}
+$('#filters').onclick=e=>{const b=e.target.closest('button');if(b){cur=+b.dataset.i;renderSite()}};
+$('#grid').onclick=e=>{const a=e.target.closest('a');if(a)$('#sel').value='Plot '+a.dataset.p};
+$('#grid').addEventListener('mousemove',e=>{const c=e.target.closest('.plot');if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-4px)`});
+$('#grid').addEventListener('mouseout',e=>{const c=e.target.closest('.plot');if(c&&!c.contains(e.relatedTarget))c.style.transform=''});
+$('#f').onsubmit=e=>{e.preventDefault();const v=Object.fromEntries(new FormData(e.target));
+D.enq.unshift({id:Date.now(),name:v.name,phone:v.phone,plot:v.plot,msg:v.msg,t:new Date().toLocaleString('en-IN'),st:'new'});save();$('#ok').style.display='block';e.target.reset()};
+/* scroll engine */
+const prog=el=>{const r=el.getBoundingClientRect(),h=r.height-innerHeight;return h>0?clamp(-r.top/h):0};
+let tick=false;
+function frame(){tick=false;const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+$('#bar').style.width=(h>0?y/h*100:0)+'%';
+document.querySelectorAll('#topo path').forEach(p=>p.style.transform=`translateY(${y*p.dataset.s}px)`);
+const n=MP.length,k=Math.round(clamp(prog($('#story'))/.8)*n);
+if(k!==lastK&&n){lastK=k;rects.forEach((r,i)=>r.classList.toggle('on',i<k));const c=MP.slice(0,k).map(p=>p.st);
+$('#na').textContent=c.filter(x=>x=='a').length;$('#nr').textContent=c.filter(x=>x=='r').length;$('#ns').textContent=c.filter(x=>x=='s').length;
+$('#cap').textContent=caps[k<n*.4?0:k<n*.8?1:2]}
+const t=$('#track');t.style.transform=`translateX(${-prog($('#projects'))*Math.max(0,t.scrollWidth-innerWidth)}px)`}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',frame);
+addEventListener('pointermove',e=>{const s=document.documentElement.style;s.setProperty('--x',e.clientX+'px');s.setProperty('--y',e.clientY+'px')});
+renderSite();
+</script>
+</body>
+</html>

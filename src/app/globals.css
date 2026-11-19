@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+[x-cloak] { display: none !important; }
+
+    body { font-family: 'Inter', sans-serif; -webkit-overflow-scrolling: touch; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .glass-card {
+        background: rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(217, 169, 28, 0.15);
+    }
+    .glass-card-light {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(217, 169, 28, 0.25);
+    }
+    .gold-gradient-text {
+        background: linear-gradient(135deg, #FFF5C0 0%, #D9A91C 50%, #997108 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .gold-border-glow {
+        box-shadow: 0 0 25px -5px rgba(217, 169, 28, 0.3);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.5);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(217, 169, 28, 0.4);
+        border-radius: 9999px;
+    }
+
+
+html { background-color: #020617; }
+
+#ptl-root nav { padding-top: env(safe-area-inset-top); }
+#ptl-root footer { padding-bottom: max(3rem, env(safe-area-inset-bottom)); }
+#ptl-root { touch-action: pan-y; }
+
+/* ---- scroll animations ---- */
+.reveal { opacity: 0; transform: translateY(44px) scale(0.98); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.reveal.in { opacity: 1; transform: none; }
+#ptl-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 60; background: linear-gradient(90deg, #d9a91c, #f9e478); }
+.ptl-float { animation: ptlfloat 12s ease-in-out infinite alternate; }
+@keyframes ptlfloat { to { transform: translate(5vw, 4vh) scale(1.2); } }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .ptl-float { animation: none; } }
