@@ -18,7 +18,12 @@ export default function AdminLoginPage() {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) return setError('Email ya password galat hai.');
-    if (data.user?.app_metadata?.role !== 'admin') {
+    const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
+      .split(',')
+      .map((adminEmail) => adminEmail.trim().toLowerCase())
+      .filter(Boolean);
+    const isAdminEmail = adminEmails.includes(data.user?.email?.toLowerCase());
+    if (data.user?.app_metadata?.role !== 'admin' && !isAdminEmail) {
       const { error: signOutError } = await supabase.auth.signOut();
       if (signOutError) console.error('Could not sign out non-admin user:', signOutError);
       return setError('Is account ko admin access nahi diya gaya hai.');

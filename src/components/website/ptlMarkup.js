@@ -1,6 +1,6 @@
 // Auto-converted from plot_the_link_lux_land_developers.html (body markup).
 // Kept as plain HTML so Tailwind can scan every class below during the project build.
-const markup = `<div id="ptl-root" class="bg-slate-950 text-slate-100 antialiased selection:bg-gold-500 selection:text-slate-950 min-h-screen" x-data="appData()">
+const markup = `<div id="ptl-root" class="bg-slate-950 text-slate-100 antialiased selection:bg-gold-500 selection:text-slate-950 min-h-screen" x-data="appData()" x-init="init()">
 <!-- ================= NAVBAR ================= -->
     <nav class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-slate-950/80 backdrop-blur-md border-b border-gold-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,9 +107,9 @@ const markup = `<div id="ptl-root" class="bg-slate-950 text-slate-100 antialiase
                     </div>
                     <div>
                         <label class="block text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Action</label>
-                        <a href="#properties" class="w-full bg-gold-500 hover:bg-gold-400 text-slate-950 font-semibold py-3 px-6 rounded-xl text-sm flex items-center justify-center gap-2 transition-all">
+                        <button type="button" @click="exploreProperties()" class="w-full bg-gold-500 hover:bg-gold-400 text-slate-950 font-semibold py-3 px-6 rounded-xl text-sm flex items-center justify-center gap-2 transition-all">
                             <i data-lucide="search" class="w-4 h-4"></i> Explore Properties
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -483,17 +483,17 @@ const markup = `<div id="ptl-root" class="bg-slate-950 text-slate-100 antialiase
 
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Your Name</label>
-                            <input type="text" x-model="contactForm.name" required placeholder="e.g. Rahul Sharma" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500">
+                            <input type="text" x-model="contactForm.name" required placeholder="Full Name" autocomplete="name" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500">
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Email Address</label>
-                                <input type="email" x-model="contactForm.email" required placeholder="name@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500">
+                                <input type="email" x-model="contactForm.email" required placeholder="Email Address" autocomplete="email" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Contact Number</label>
-                                <input type="tel" x-model="contactForm.phone" required placeholder="+91 9876543210" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500">
+                                <input type="tel" x-model="contactForm.phone" required placeholder="+91" inputmode="tel" autocomplete="tel" pattern="[0-9+ -]{10,15}" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500">
                             </div>
                         </div>
 
@@ -502,15 +502,15 @@ const markup = `<div id="ptl-root" class="bg-slate-950 text-slate-100 antialiase
                             <textarea x-model="contactForm.message" rows="3" placeholder="Tell us when you'd like to visit the land parcel..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-gold-500"></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-slate-950 font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm">
-                            Submit Appointment Request
+                        <button type="submit" x-bind:disabled="isSubmitting" class="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 disabled:opacity-60 disabled:cursor-not-allowed text-slate-950 font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm">
+                            <span x-text="isSubmitting ? 'Sending...' : 'Submit Appointment Request'"></span>
                         </button>
                     </form>
 
                     <!-- Success Alert -->
                     <div x-show="formSubmitted" x-cloak class="mt-4 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-3">
                         <i data-lucide="check-circle" class="w-5 h-5 shrink-0"></i>
-                        <span>Thank you! Your appointment request has been logged into our dynamic backend. Our representative will call you shortly.</span>
+                        <span>Sent successfully! Your appointment request has been received. Our representative will call you shortly.</span>
                     </div>
                 </div>
             </div>
